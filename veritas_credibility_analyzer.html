@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#09090b;--s1:#111113;--s2:#18181b;--s3:#222226;
+  --bd:#2a2a30;--bd2:#38383f;
+  --t1:#f4f4f8;--t2:#9090a0;--t3:#4a4a58;--t4:#28282f;
+  --acc:#b8f040;--acc2:#7aaa20;
+  --red:#f87171;--redbg:#2d1111;--redbr:#5a2020;
+  --yel:#fbbf24;--yelbg:#2a1f08;--yelbr:#5a4010;
+  --grn:#4ade80;--grnbg:#0d2a18;--grnbr:#1a5a30;
+  --mono:'IBM Plex Mono',monospace;
+  --serif:'Playfair Display',serif;
+  --sans:'Inter',sans-serif;
+  --r4:4px;--r6:6px;--r8:8px;
+}
+body{background:var(--bg);color:var(--t1);font-family:var(--sans);font-size:14px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(184,240,64,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(184,240,64,.018) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+
+/* HEADER */
+.hd{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;border-bottom:1px solid var(--bd);background:rgba(9,9,11,.96)}
+.logo{display:flex;align-items:baseline;gap:8px}
+.logo-w{font-family:var(--serif);font-size:22px;font-weight:900;color:var(--acc);letter-spacing:-0.5px}
+.logo-t{font-family:var(--mono);font-size:9px;color:var(--t3);letter-spacing:.15em;border:1px solid var(--bd);padding:2px 7px;border-radius:3px}
+.hd-st{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;color:var(--t3)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--acc);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* HERO */
+.hero{position:relative;z-index:5;text-align:center;padding:44px 24px 28px}
+.hero-eye{font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--acc2);text-transform:uppercase;margin-bottom:14px}
+.hero-h{font-family:var(--serif);font-size:clamp(32px,5vw,58px);font-weight:900;letter-spacing:-1.5px;line-height:1;margin-bottom:10px;background:linear-gradient(130deg,#f4f4f8 0%,#b8f040 55%,#7aaa20 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-s{font-size:13px;color:var(--t2);max-width:420px;margin:0 auto 28px;font-weight:300;line-height:1.7}
+
+/* TABS + INPUT */
+.wrap{position:relative;z-index:5;max-width:720px;margin:0 auto;padding:0 20px 32px}
+.tabs{display:flex;gap:0;margin-bottom:-1px;position:relative;z-index:2}
+.tab{padding:8px 16px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);border:1px solid var(--bd);border-bottom:none;background:var(--s1);cursor:pointer;transition:all .15s;border-radius:4px 4px 0 0}
+.tab.on{color:var(--acc);border-color:var(--bd2);background:var(--s2)}
+.tab:hover:not(.on){color:var(--t1)}
+.ibox{background:var(--s2);border:1px solid var(--bd2);border-radius:0 6px 6px 6px;padding:22px}
+.isec{display:none}.isec.on{display:block}
+.lbl{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--t2);margin-bottom:6px;display:block}
+textarea,input{width:100%;background:var(--s1);border:1px solid var(--bd2);color:var(--t1);font-family:var(--sans);font-size:13px;padding:11px 14px;border-radius:var(--r4);outline:none;transition:border-color .2s;line-height:1.6}
+textarea{min-height:100px;resize:vertical}
+textarea:focus,input:focus{border-color:var(--acc)}
+textarea::placeholder,input::placeholder{color:var(--t4)}
+.hl-row{margin-bottom:14px}
+.abtn{margin-top:16px;width:100%;padding:14px;background:var(--acc);color:#09090b;border:none;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border-radius:var(--r4);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.abtn:hover{background:#c8ff50;transform:translateY(-1px)}
+.abtn:active{transform:translateY(0)}
+.abtn:disabled{background:var(--bd2);color:var(--t3);cursor:not-allowed;transform:none}
+.spin{width:13px;height:13px;border:2px solid rgba(0,0,0,.25);border-top-color:#000;border-radius:50%;animation:sp .6s linear infinite;display:none}
+@keyframes sp{to{transform:rotate(360deg)}}
+.pills{margin-top:13px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.p-label{font-family:var(--mono);font-size:9px;color:var(--t3);letter-spacing:.1em;text-transform:uppercase}
+.pill{font-family:var(--mono);font-size:9px;padding:4px 11px;border:1px solid var(--bd2);border-radius:100px;color:var(--t2);cursor:pointer;transition:all .15s;background:transparent}
+.pill:hover{border-color:var(--acc);color:var(--acc)}
+
+/* RESULTS */
+#res{position:relative;z-index:5;max-width:720px;margin:0 auto;padding:0 20px 60px;display:none}
+#res.on{display:block;animation:fu .4s ease}
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.divider{height:1px;background:var(--bd);margin-bottom:24px}
+
+/* VERDICT */
+.vcard{border-radius:var(--r8);padding:26px 28px;margin-bottom:18px;border:1px solid;position:relative;overflow:hidden}
+.vcard.grn{border-color:var(--grnbr);background:var(--grnbg);color:var(--grn)}
+.vcard.yel{border-color:var(--yelbr);background:var(--yelbg);color:var(--yel)}
+.vcard.red{border-color:var(--redbr);background:var(--redbg);color:var(--red)}
+.vcard::before{content:'';position:absolute;inset:0;opacity:.04;background:radial-gradient(ellipse at 15% 50%,currentColor 0%,transparent 65%)}
+.vt{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.v-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;opacity:.6;margin-bottom:4px}
+.v-txt{font-family:var(--serif);font-size:clamp(24px,4vw,38px);font-weight:900;letter-spacing:-1px;line-height:1}
+.v-score{text-align:right}
+.snum{font-family:var(--mono);font-size:clamp(40px,6vw,56px);font-weight:500;line-height:1}
+.slbl{font-family:var(--mono);font-size:9px;letter-spacing:.15em;opacity:.55}
+.vsumm{margin-top:16px;font-size:13px;line-height:1.75;color:var(--t1);opacity:.82;max-width:580px}
+.conf-row{display:flex;align-items:center;gap:10px;margin-top:13px}
+.c-lbl{font-family:var(--mono);font-size:9px;color:var(--t2);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.c-track{flex:1;height:3px;background:var(--bd);border-radius:2px;overflow:hidden}
+.c-fill{height:100%;background:linear-gradient(90deg,var(--acc2),var(--acc));border-radius:2px;transition:width .8s ease}
+.c-pct{font-family:var(--mono);font-size:10px;color:var(--t2)}
+.vmeta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chip{font-family:var(--mono);font-size:9px;padding:3px 9px;border-radius:3px;background:rgba(255,255,255,.05);color:var(--t2);letter-spacing:.05em}
+
+/* FP ROW */
+.fp{display:flex;align-items:center;gap:12px;padding:11px 16px;background:var(--s1);border:1px solid var(--bd);border-radius:var(--r4);margin-bottom:20px}
+.fp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);white-space:nowrap}
+.fp-h{font-family:var(--mono);font-size:12px;color:var(--acc);letter-spacing:.08em;flex:1}
+.fp-t{font-family:var(--mono);font-size:9px;color:var(--t3)}
+
+/* SIGNALS */
+.sec-t{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--t2);margin-bottom:14px;padding-bottom:7px;border-bottom:1px solid var(--bd)}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:24px}
+.scard{background:var(--s2);border:1px solid var(--bd);border-radius:var(--r6);padding:15px;transition:border-color .2s}
+.scard:hover{border-color:var(--bd2)}
+.stop{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+.sname{font-size:12px;font-weight:500;color:var(--t1)}
+.sic{font-size:17px}
+.sbar{height:3px;background:var(--bd);border-radius:2px;margin-bottom:9px;overflow:hidden}
+.sfill{height:100%;border-radius:2px;transition:width .9s cubic-bezier(.16,1,.3,1)}
+.sfill.g{background:var(--grn)}.sfill.m{background:var(--yel)}.sfill.p{background:var(--red)}
+.sbot{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.sdet{font-size:11px;color:var(--t2);line-height:1.4;flex:1}
+.schip{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:3px;white-space:nowrap}
+.schip.g{background:var(--grnbg);color:var(--grn)}.schip.m{background:var(--yelbg);color:var(--yel)}.schip.p{background:var(--redbg);color:var(--red)}
+
+/* FLAGS */
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+@media(max-width:500px){.frow{grid-template-columns:1fr}}
+.fpan{background:var(--s2);border:1px solid var(--bd);border-radius:var(--r6);padding:16px}
+.fptit{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+.fpan.r .fptit{color:var(--red)}.fpan.g .fptit{color:var(--grn)}
+.fi{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px;font-size:11px;color:var(--t2);line-height:1.5}
+.fi:last-child{margin-bottom:0}
+.fb{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.fpan.r .fb{background:var(--red)}.fpan.g .fb{background:var(--grn)}
+.emp{font-size:11px;color:var(--t4);font-style:italic}
+
+.proc{text-align:right;font-family:var(--mono);font-size:9px;color:var(--t3);letter-spacing:.08em}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--s2);border:1px solid var(--bd2);border-radius:var(--r6);padding:12px 16px;font-size:12px;color:var(--t1);z-index:1000;transform:translateY(70px);opacity:0;transition:all .3s;max-width:280px}
+.toast.on{transform:translateY(0);opacity:1}
+.toast.err{border-color:var(--redbr)}.toast.ok{border-color:var(--grnbr)}
+footer{position:relative;z-index:5;text-align:center;padding:24px;border-top:1px solid var(--bd);font-family:var(--mono);font-size:9px;color:var(--t4);letter-spacing:.1em}
+@media(max-width:480px){.hd{padding:12px 16px}.hero{padding:32px 16px 20px}.wrap,.wrap+*{padding:0 12px 24px}#res{padding:0 12px 40px}.vcard{padding:18px 16px}.v-txt{font-size:22px}.snum{font-size:36px}}
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <div class="logo">
+    <span class="logo-w">Veritas</span>
+    <span class="logo-t">v1.0</span>
+  </div>
+  <div class="hd-st"><div class="dot"></div>Engine Active</div>
+</div>
+
+<div class="hero">
+  <div class="hero-eye">AI-Powered · 7-Signal NLP · Cryptographic Verification</div>
+  <h1 class="hero-h">Is It True?</h1>
+  <p class="hero-s">Paste any news article, headline, or URL. Veritas scores it across 7 independent credibility signals and returns a tamper-proof verdict in seconds.</p>
+</div>
+
+<div class="wrap">
+  <div class="tabs">
+    <button class="tab on" onclick="sw('text',this)">Article Text</button>
+    <button class="tab" onclick="sw('url',this)">URL</button>
+    <button class="tab" onclick="sw('hl',this)">Headline Only</button>
+  </div>
+  <div class="ibox">
+    <div id="t-text" class="isec on">
+      <div class="hl-row">
+        <label class="lbl">Headline (optional)</label>
+        <input id="t-hl" type="text" placeholder="Enter the article headline...">
+      </div>
+      <label class="lbl">Article Body</label>
+      <textarea id="t-body" placeholder="Paste the full article text here for the most accurate analysis..."></textarea>
+    </div>
+    <div id="t-url" class="isec">
+      <label class="lbl">Article URL</label>
+      <input id="u-inp" type="url" placeholder="https://example.com/article...">
+      <p style="margin-top:8px;font-size:11px;color:var(--t2)">Domain reputation is checked against 500+ verified sources.</p>
+    </div>
+    <div id="t-hl" class="isec">
+      <label class="lbl">Headline / Claim</label>
+      <textarea id="h-inp" style="min-height:72px" placeholder="e.g. Scientists Discover SHOCKING Cure Doctors Don't Want You To Know!"></textarea>
+      <p style="margin-top:8px;font-size:11px;color:var(--t2)">Quick-scan: clickbait, sensationalism, and emotional manipulation signals.</p>
+    </div>
+
+    <button class="abtn" id="abtn" onclick="run()">
+      <div class="spin" id="spin"></div>
+      <span id="btxt">Analyze Credibility</span>
+    </button>
+
+    <div class="pills">
+      <span class="p-label">Try:</span>
+      <button class="pill" onclick="ex('fake')">Fake News</button>
+      <button class="pill" onclick="ex('real')">Real News</button>
+      <button class="pill" onclick="ex('sus')">Suspicious</button>
+      <button class="pill" onclick="ex('url')">Known Source</button>
+    </div>
+  </div>
+</div>
+
+<section id="res">
+  <div class="divider"></div>
+  <div class="vcard" id="vc">
+    <div class="vt">
+      <div>
+        <div class="v-lbl">Credibility Verdict</div>
+        <div class="v-txt" id="vtxt">—</div>
+      </div>
+      <div class="v-score">
+        <div class="v-lbl">Overall Score</div>
+        <div class="snum" id="snum">—</div>
+        <div class="slbl">/ 100</div>
+      </div>
+    </div>
+    <div class="vsumm" id="vsumm"></div>
+    <div class="conf-row">
+      <span class="c-lbl">Confidence</span>
+      <div class="c-track"><div class="c-fill" id="cfill" style="width:0%"></div></div>
+      <span class="c-pct" id="cpct">0%</span>
+    </div>
+    <div class="vmeta" id="vmeta"></div>
+  </div>
+
+  <div class="fp">
+    <span class="fp-lbl"><i class="ti ti-lock" aria-hidden="true"></i> Fingerprint</span>
+    <span class="fp-h" id="fph">—</span>
+    <span class="fp-t" id="fpt">—</span>
+  </div>
+
+  <div class="sec-t">Signal Analysis · 7 Detectors</div>
+  <div class="sgrid" id="sgrid"></div>
+
+  <div class="frow">
+    <div class="fpan r">
+      <div class="fptit"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Red Flags</div>
+      <div id="rfl"></div>
+    </div>
+    <div class="fpan g">
+      <div class="fptit"><i class="ti ti-circle-check" aria-hidden="true"></i> Positive Indicators</div>
+      <div id="pfl"></div>
+    </div>
+  </div>
+
+  <div class="proc">Processed in <span id="ptime">—</span>ms · Veritas Engine v1.0</div>
+</section>
+
+<footer>Veritas · AI Credibility Analyzer · 7 NLP Signal Detectors · Python + FastAPI Backend</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const EXAMPLES={
+  fake:{tab:'text',hl:"SHOCKING: Scientists PROVED Vaccines Cause Autism — Government COVERING IT UP!!!",body:"WAKE UP SHEEPLE!!! The MAINSTREAM MEDIA won't tell you this but doctors HATE this simple trick! A bombshell new study that THEY are trying to CENSOR has PROVEN beyond all doubt that vaccines are deadly poisons! The deep state globalists have been HIDING this DEVASTATING truth for DECADES. Share this before they DELETE it! URGENT: Act fast before it's too late!!!"},
+  real:{tab:'text',hl:"Federal Reserve raises interest rates by 0.25 percentage points",body:"The Federal Reserve raised its benchmark interest rate by a quarter of a percentage point on Wednesday, according to officials who confirmed the move following their two-day policy meeting. Fed Chair Jerome Powell stated that the decision reflects ongoing efforts to bring inflation toward the central bank's 2 percent target. \"We remain committed to restoring price stability,\" Powell told reporters. Data from the Bureau of Labor Statistics indicates inflation has fallen from a peak of 9.1 percent in June 2022 to approximately 3.2 percent as of July 2023. The increase brings the federal funds rate to a target range of 5.25 to 5.5 percent."},
+  sus:{tab:'text',hl:"You Won't Believe What Big Pharma Is Hiding From You About This Common Fruit",body:"Scientists are absolutely AMAZED by what this incredible fruit can do — and pharmaceutical companies are FURIOUS. According to sources close to the situation, this natural remedy has been used for centuries but doctors don't want you to know because it would destroy their profits. Studies have shown this could be 10 times more effective than leading medications. The truth is shocking. Share this with everyone before it gets taken down!"},
+  url:{tab:'url',url:'https://www.reuters.com/world/us/fed-raises-rates-quarter-point-2023-07-26/'}
+};
+
+let activeTab='text';
+function sw(t,el){
+  activeTab=t;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.isec').forEach(x=>x.classList.remove('on'));
+  const map={text:'t-text',url:'t-url',hl:'t-hl'};
+  document.getElementById(map[t]).classList.add('on');
+}
+function ex(k){
+  const e=EXAMPLES[k];
+  if(e.tab==='text'){
+    sw('text',document.querySelectorAll('.tab')[0]);
+    document.getElementById('t-hl').value=e.hl||'';
+    document.getElementById('t-body').value=e.body||'';
+  }else if(e.tab==='url'){
+    sw('url',document.querySelectorAll('.tab')[1]);
+    document.getElementById('u-inp').value=e.url||'';
+  }else{
+    sw('hl',document.querySelectorAll('.tab')[2]);
+    document.getElementById('h-inp').value=e.hl||'';
+  }
+}
+
+async function run(){
+  const btn=document.getElementById('abtn');
+  const sp=document.getElementById('spin');
+  const bt=document.getElementById('btxt');
+  let payload={};
+  if(activeTab==='text'){
+    const h=document.getElementById('t-hl').value.trim();
+    const b=document.getElementById('t-body').value.trim();
+    if(!h&&!b){toast('Please enter a headline or article text.','err');return;}
+    if(h)payload.headline=h;
+    if(b)payload.text=b;
+  }else if(activeTab==='url'){
+    const u=document.getElementById('u-inp').value.trim();
+    if(!u){toast('Please enter a URL.','err');return;}
+    payload.url=u;payload.text=`Analysis for: ${u}`;
+  }else{
+    const h=document.getElementById('h-inp').value.trim();
+    if(!h){toast('Please enter a headline.','err');return;}
+    payload.headline=h;payload.text=h;
+  }
+  btn.disabled=true;sp.style.display='block';bt.textContent='Analyzing...';
+  try{
+    const r=await fetch(`${window.location.origin}/api/analyze`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if(!r.ok){const e=await r.json();throw new Error(e.detail||'Analysis failed');}
+    const data=await r.json();
+    render(data);
+    document.getElementById('res').classList.add('on');
+    document.getElementById('res').scrollIntoView({behavior:'smooth',block:'start'});
+    toast('Analysis complete','ok');
+  }catch(e){
+    toast(`${e.message}`,'err');
+  }finally{
+    btn.disabled=false;sp.style.display='none';bt.textContent='Analyze Credibility';
+  }
+}
+
+function render(data){
+  const a=data.analysis;
+  const vc=document.getElementById('vc');
+  vc.className=`vcard ${a.verdict_color}`;
+  document.getElementById('vtxt').textContent=a.verdict;
+  document.getElementById('snum').textContent=a.overall_score;
+  document.getElementById('vsumm').textContent=a.summary;
+  const cp=Math.round(a.confidence*100);
+  document.getElementById('cfill').style.width=`${cp}%`;
+  document.getElementById('cpct').textContent=`${cp}%`;
+  document.getElementById('vmeta').innerHTML=`
+    <span class="chip"><i class="ti ti-bolt" aria-hidden="true"></i> ${data.processing_time_ms}ms</span>
+    <span class="chip"><i class="ti ti-chart-bar" aria-hidden="true"></i> ${a.signals.length} signals</span>
+    ${a.source_info?`<span class="chip"><i class="ti ti-world" aria-hidden="true"></i> ${a.source_info.domain}</span>`:''}
+    <span class="chip">${cp>=70?'High':cp>=50?'Medium':'Low'} confidence</span>`;
+  document.getElementById('fph').textContent=`VTRS-${a.fingerprint}`;
+  document.getElementById('fpt').textContent=new Date(a.timestamp).toLocaleTimeString();
+  const grid=document.getElementById('sgrid');
+  grid.innerHTML=a.signals.map(s=>{
+    const pct=Math.round(s.score*100);
+    const c=s.verdict==='GOOD'?'g':s.verdict==='MODERATE'?'m':'p';
+    return`<div class="scard"><div class="stop"><span class="sname">${s.icon} ${s.name}</span><span class="schip ${c}">${pct}</span></div><div class="sbar"><div class="sfill ${c}" style="width:0%" data-w="${pct}%"></div></div><div class="sbot"><span class="sdet">${s.detail}</span></div></div>`;
+  }).join('');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    document.querySelectorAll('.sfill[data-w]').forEach(el=>el.style.width=el.dataset.w);
+  }));
+  const rfl=document.getElementById('rfl');
+  rfl.innerHTML=a.red_flags.length?a.red_flags.map(f=>`<div class="fi"><div class="fb"></div><span>${f}</span></div>`).join(''):`<div class="emp">No red flags detected</div>`;
+  const pfl=document.getElementById('pfl');
+  pfl.innerHTML=a.positive_indicators.length?a.positive_indicators.map(p=>`<div class="fi"><div class="fb"></div><span>${p}</span></div>`).join(''):`<div class="emp">No positive indicators found</div>`;
+  document.getElementById('ptime').textContent=data.processing_time_ms;
+}
+
+function toast(msg,type=''){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className=`toast ${type} on`;
+  setTimeout(()=>t.classList.remove('on'),3200);
+}
+
+['u-inp','h-inp','t-hl'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el)el.addEventListener('keydown',e=>{if(e.key==='Enter')run();});
+});
+</script>
+</body>
+</html>
